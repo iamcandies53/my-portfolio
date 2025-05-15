@@ -1,169 +1,813 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Same head content as index.html -->
-    <title>My Portfolio | Survey</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Provide feedback on Diana Solomon's portfolio website">
+    <meta name="keywords" content="survey, feedback, portfolio, web developer">
+    <meta name="author" content="Diana Solomon">
+    <title>Diana's Portfolio | Feedback Survey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b9d;
+            --primary-light: #ffa5c5;
+            --primary-dark: #d44d7d;
+            --secondary-color: #f8bbd0;
+            --accent-color: #ff4081;
+            --dark-color: #333;
+            --light-color: #fff;
+            --gradient-pink: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --gradient-purple: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --shadow: 0 10px 20px rgba(255, 107, 157, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        /* Header & Navigation (same as index.html) */
+        header {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "";
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links .active {
+            color: var(--primary-color);
+        }
+
+        .nav-links .active::after {
+            width: 100%;
+        }
+
+        .theme-btn {
+            background: var(--gradient-pink);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 20px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-color);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Survey Page Styles */
+        main.survey-container {
+            padding: 150px 0 80px;
+            background-color: #fff9fb;
+        }
+
+        .survey-container h1 {
+            text-align: center;
+            font-size: 48px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .survey-container h1::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-pink);
+            border-radius: 2px;
+        }
+
+        .survey-container p {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .survey-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        fieldset {
+            border: 1px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        legend {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-dark);
+            padding: 0 15px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rating-options,
+        .radio-options,
+        .checkbox-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rating-options label,
+        .radio-options label,
+        .checkbox-options label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        .rating-options label:hover,
+        .radio-options label:hover,
+        .checkbox-options label:hover {
+            background-color: rgba(255, 107, 157, 0.05);
+        }
+
+        .rating-options input[type="radio"],
+        .radio-options input[type="radio"],
+        .checkbox-options input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+
+        .rating-options span,
+        .radio-options span,
+        .checkbox-options span {
+            font-weight: 400;
+            color: #555;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn.primary {
+            background: var(--gradient-pink);
+            color: white;
+        }
+
+        .btn.secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        /* Footer (same as index.html) */
+        footer {
+            background: var(--gradient-pink);
+            color: white;
+            padding: 80px 0 0;
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--dark-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 50px 50px 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--primary-dark);
+        }
+
+        .footer-bottom p {
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer-bottom a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .survey-container h1 {
+                font-size: 36px;
+            }
+
+            .survey-form {
+                padding: 30px 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .survey-container h1 {
+                font-size: 32px;
+            }
+
+            .survey-container p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+
+            legend {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Same header as index.html -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Diana</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="survey.html" class="active">Survey</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-btn">🌙</button>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <main class="survey-container">
-        <h1>Website Feedback Survey</h1>
-        <p>Thank you for taking the time to provide feedback about my portfolio website. Your input helps me improve!</p>
-        
-        <form id="surveyForm" class="survey-form">
-            <fieldset>
-                <legend>Personal Information</legend>
-                
-                <div class="form-group">
-                    <label for="survey-name">Name (optional)</label>
-                    <input type="text" id="survey-name" name="name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="survey-email">Email (optional)</label>
-                    <input type="email" id="survey-email" name="email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="survey-role">Which best describes you?</label>
-                    <select id="survey-role" name="role">
-                        <option value="">Select an option</option>
-                        <option value="employer">Potential Employer</option>
-                        <option value="client">Potential Client</option>
-                        <option value="peer">Fellow Developer</option>
-                        <option value="student">Student</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </fieldset>
+        <div class="container">
+            <h1>Website Feedback Survey</h1>
+            <p>Thank you for taking the time to provide feedback about my portfolio website. Your honest opinions help me create a better experience for all visitors!</p>
             
-            <fieldset>
-                <legend>Website Feedback</legend>
-                
-                <div class="form-group">
-                    <label>How would you rate the overall design of the website?</label>
-                    <div class="rating-options">
-                        <label>
-                            <input type="radio" name="design-rating" value="5" required>
-                            <span>5 - Excellent</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="design-rating" value="4">
-                            <span>4 - Very Good</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="design-rating" value="3">
-                            <span>3 - Good</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="design-rating" value="2">
-                            <span>2 - Fair</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="design-rating" value="1">
-                            <span>1 - Poor</span>
-                        </label>
+            <form id="surveyForm" class="survey-form">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="survey-name">Name (optional)</label>
+                        <input type="text" id="survey-name" name="name" placeholder="Your name">
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>What did you like most about the website? (Check all that apply)</label>
-                    <div class="checkbox-options">
-                        <label>
-                            <input type="checkbox" name="liked" value="design">
-                            <span>Design and layout</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="liked" value="content">
-                            <span>Content and information</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="liked" value="projects">
-                            <span>Projects section</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="liked" value="navigation">
-                            <span>Ease of navigation</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="liked" value="mobile">
-                            <span>Mobile responsiveness</span>
-                        </label>
+                    
+                    <div class="form-group">
+                        <label for="survey-email">Email (optional)</label>
+                        <input type="email" id="survey-email" name="email" placeholder="your.email@example.com">
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="improvements">What could be improved? (optional)</label>
-                    <textarea id="improvements" name="improvements" rows="4"></textarea>
-                </div>
-            </fieldset>
-            
-            <fieldset>
-                <legend>Additional Questions</legend>
-                
-                <div class="form-group">
-                    <label for="visit-frequency">How often do you visit portfolio websites?</label>
-                    <select id="visit-frequency" name="visit-frequency">
-                        <option value="">Select an option</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="rarely">Rarely</option>
-                        <option value="first">This is my first time</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Would you recommend my portfolio to others?</label>
-                    <div class="radio-options">
-                        <label>
-                            <input type="radio" name="recommend" value="yes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="recommend" value="no">
-                            <span>No</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="recommend" value="maybe">
-                            <span>Maybe</span>
-                        </label>
+                    
+                    <div class="form-group">
+                        <label for="survey-role">Which best describes you?</label>
+                        <select id="survey-role" name="role">
+                            <option value="">Select an option</option>
+                            <option value="employer">Potential Employer</option>
+                            <option value="client">Potential Client</option>
+                            <option value="peer">Fellow Developer</option>
+                            <option value="student">Student</option>
+                            <option value="educator">Educator</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
-                </div>
+                </fieldset>
                 
-                <div class="form-group">
-                    <label for="features">What additional features would you like to see? (optional)</label>
-                    <textarea id="features" name="features" rows="4"></textarea>
+                <fieldset>
+                    <legend>Website Feedback</legend>
+                    
+                    <div class="form-group">
+                        <label>How would you rate the overall design of the website?*</label>
+                        <div class="rating-options">
+                            <label>
+                                <input type="radio" name="design-rating" value="5" required>
+                                <span>5 - Excellent (Beautiful and professional)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="design-rating" value="4">
+                                <span>4 - Very Good (Great with minor improvements)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="design-rating" value="3">
+                                <span>3 - Good (Average but works well)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="design-rating" value="2">
+                                <span>2 - Fair (Needs significant improvement)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="design-rating" value="1">
+                                <span>1 - Poor (Not appealing or functional)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>What did you like most about the website? (Check all that apply)</label>
+                        <div class="checkbox-options">
+                            <label>
+                                <input type="checkbox" name="liked" value="design">
+                                <span>Design and visual appeal</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="liked" value="content">
+                                <span>Content quality and information</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="liked" value="projects">
+                                <span>Projects section (showcase of work)</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="liked" value="navigation">
+                                <span>Ease of navigation and user experience</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="liked" value="mobile">
+                                <span>Mobile responsiveness</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="liked" value="performance">
+                                <span>Loading speed and performance</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="improvements">What could be improved? (optional)</label>
+                        <textarea id="improvements" name="improvements" rows="4" placeholder="Please share any suggestions for improvement..."></textarea>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Additional Questions</legend>
+                    
+                    <div class="form-group">
+                        <label for="visit-frequency">How often do you visit portfolio websites?</label>
+                        <select id="visit-frequency" name="visit-frequency">
+                            <option value="">Select an option</option>
+                            <option value="daily">Daily (I review portfolios regularly)</option>
+                            <option value="weekly">Weekly (A few times a month)</option>
+                            <option value="monthly">Monthly (Occasionally)</option>
+                            <option value="rarely">Rarely (Only when needed)</option>
+                            <option value="first">This is my first time</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Would you recommend my portfolio to others?*</label>
+                        <div class="radio-options">
+                            <label>
+                                <input type="radio" name="recommend" value="yes" required>
+                                <span>Yes, definitely</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="recommend" value="no">
+                                <span>No, probably not</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="recommend" value="maybe">
+                                <span>Maybe, with some improvements</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="features">What additional features would you like to see? (optional)</label>
+                        <textarea id="features" name="features" rows="4" placeholder="Examples: Blog section, case studies, testimonials..."></textarea>
+                    </div>
+                </fieldset>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Submit Survey</button>
+                    <button type="reset" class="btn secondary">Reset Form</button>
                 </div>
-            </fieldset>
-            
-            <div class="form-actions">
-                <button type="submit" class="btn submit-btn">Submit Survey</button>
-                <button type="reset" class="btn secondary-btn">Reset Form</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </main>
 
-    <!-- Same footer as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Diana Solomon. All Rights Reserved. | Designed with &hearts; by <a href="about.html">Diana</a></p>
+        </div>
+    </footer>
 
     <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        let darkMode = false;
+
+        themeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            if (darkMode) {
+                document.documentElement.style.setProperty('--dark-color', '#f8f8f8');
+                document.documentElement.style.setProperty('--light-color', '#333');
+                document.documentElement.style.setProperty('--primary-color', '#ff4081');
+                document.body.style.backgroundColor = '#1a1a1a';
+                themeToggle.textContent = '☀️';
+            } else {
+                document.documentElement.style.setProperty('--dark-color', '#333');
+                document.documentElement.style.setProperty('--light-color', '#fff');
+                document.documentElement.style.setProperty('--primary-color', '#ff6b9d');
+                document.body.style.backgroundColor = '#fff9fb';
+                themeToggle.textContent = '🌙';
+            }
+        });
+
+        // Form validation
         document.getElementById('surveyForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
             // Validate required fields
             const designRating = document.querySelector('input[name="design-rating"]:checked');
             const recommend = document.querySelector('input[name="recommend"]:checked');
+            let isValid = true;
             
-            if (!designRating || !recommend) {
-                alert('Please answer all required questions.');
-                return;
+            if (!designRating) {
+                alert('Please rate the overall design of the website.');
+                isValid = false;
             }
             
-            // Form is valid - you would typically send the data to a server here
-            alert('Thank you for your feedback! Your responses have been submitted.');
-            this.reset();
+            if (!recommend) {
+                alert('Please indicate if you would recommend my portfolio.');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Form is valid - you would typically send the data to a server here
+                alert('Thank you for your valuable feedback, Diana! Your responses will help me improve my portfolio.');
+                this.reset();
+            }
+        });
+
+        // Animation for form fields
+        const formGroups = document.querySelectorAll('.form-group');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        formGroups.forEach(group => {
+            group.style.opacity = '0';
+            group.style.transform = 'translateY(20px)';
+            group.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(group);
         });
     </script>
 </body>
