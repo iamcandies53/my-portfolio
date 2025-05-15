@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head content as index.html -->
+    <title>My Portfolio | Survey</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Same header as index.html -->
+
+    <main class="survey-container">
+        <h1>Website Feedback Survey</h1>
+        <p>Thank you for taking the time to provide feedback about my portfolio website. Your input helps me improve!</p>
+        
+        <form id="surveyForm" class="survey-form">
+            <fieldset>
+                <legend>Personal Information</legend>
+                
+                <div class="form-group">
+                    <label for="survey-name">Name (optional)</label>
+                    <input type="text" id="survey-name" name="name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="survey-email">Email (optional)</label>
+                    <input type="email" id="survey-email" name="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="survey-role">Which best describes you?</label>
+                    <select id="survey-role" name="role">
+                        <option value="">Select an option</option>
+                        <option value="employer">Potential Employer</option>
+                        <option value="client">Potential Client</option>
+                        <option value="peer">Fellow Developer</option>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Website Feedback</legend>
+                
+                <div class="form-group">
+                    <label>How would you rate the overall design of the website?</label>
+                    <div class="rating-options">
+                        <label>
+                            <input type="radio" name="design-rating" value="5" required>
+                            <span>5 - Excellent</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="design-rating" value="4">
+                            <span>4 - Very Good</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="design-rating" value="3">
+                            <span>3 - Good</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="design-rating" value="2">
+                            <span>2 - Fair</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="design-rating" value="1">
+                            <span>1 - Poor</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>What did you like most about the website? (Check all that apply)</label>
+                    <div class="checkbox-options">
+                        <label>
+                            <input type="checkbox" name="liked" value="design">
+                            <span>Design and layout</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="liked" value="content">
+                            <span>Content and information</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="liked" value="projects">
+                            <span>Projects section</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="liked" value="navigation">
+                            <span>Ease of navigation</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="liked" value="mobile">
+                            <span>Mobile responsiveness</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="improvements">What could be improved? (optional)</label>
+                    <textarea id="improvements" name="improvements" rows="4"></textarea>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Additional Questions</legend>
+                
+                <div class="form-group">
+                    <label for="visit-frequency">How often do you visit portfolio websites?</label>
+                    <select id="visit-frequency" name="visit-frequency">
+                        <option value="">Select an option</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="rarely">Rarely</option>
+                        <option value="first">This is my first time</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Would you recommend my portfolio to others?</label>
+                    <div class="radio-options">
+                        <label>
+                            <input type="radio" name="recommend" value="yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="recommend" value="no">
+                            <span>No</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="recommend" value="maybe">
+                            <span>Maybe</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="features">What additional features would you like to see? (optional)</label>
+                    <textarea id="features" name="features" rows="4"></textarea>
+                </div>
+            </fieldset>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn submit-btn">Submit Survey</button>
+                <button type="reset" class="btn secondary-btn">Reset Form</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Same footer as index.html -->
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validate required fields
+            const designRating = document.querySelector('input[name="design-rating"]:checked');
+            const recommend = document.querySelector('input[name="recommend"]:checked');
+            
+            if (!designRating || !recommend) {
+                alert('Please answer all required questions.');
+                return;
+            }
+            
+            // Form is valid - you would typically send the data to a server here
+            alert('Thank you for your feedback! Your responses have been submitted.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
